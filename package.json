@@ -25,5 +25,10 @@
     "sass": "^1.25.0",
     "sass-loader": "^8.0.2",
     "vue-template-compiler": "^2.6.11"
-  }
+  },
+  "browserslist": [
+    "> 5%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
 }
