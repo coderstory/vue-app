@@ -1,32 +1,34 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <!-- 组件中应用组件，并给子组件传值 -->
+    <todo-list :todos="todoData" />
   </div>
 </template>
-
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+<script>
+// 导入组件
+import todoList from "./components/todoList";
+export default {
+  // 组件的名称
+  name: "app",
+  // 绑定的数据源
+  data() {
+    return {
+      msg: "",
+      todoData: [
+        {
+          id: 1,
+          title: "first",
+          completed: true
+        },
+        { id: 2, title: "2", completed: true },
+        { id: 3, title: "3", completed: true }
+      ]
+    };
+  },
+  components: {
+    //声明使用这个组件
+    todoList
   }
-}
-</style>
+};
+</script>
+<style lang="scss"></style>

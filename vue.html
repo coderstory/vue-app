@@ -1,0 +1,98 @@
+<html>
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .dd {
+            width: 200px;
+            height: 100px;
+            background-color: rgb(246, 176, 217);
+            border: 3px solid #FFF;
+            float: left;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="dd" v-text="'value: '+msg" @click="myClick" :title="title"></div>
+        <div class="dd" v-html="html"></div>
+        <!-- 注册一个回车时间并传递当前事件-->
+        <!--v-model双向绑定msg 会影响第一个div的值-->
+        <div class="dd"><input type="text" @keyup.enter="myEnter($event)" v-model="msg"></div>
+        <div class="dd">
+            <table>
+                <tr>
+                    <th>id</th>
+                    <th>name</th>
+                </tr>
+                <tr v-for="(item,index)  in list">
+                    <th v-for="attr in item">{{attr}}</th>
+                </tr>
+            </table>
+        </div>
+        <div class="dd">
+            <button @click="switchShow">switch show/hide</button>
+            <img src="https://pic.rmb.bdstatic.com/c86255e8028696139d3e3e4bb44c047b.png" v-show="needShow">
+        </div>
+    </div>
+</body>
+<script>
+    // 一个基础的纯VUE页面
+    var app = new Vue({
+        // 绑定dom 作用域
+        el: "#app",
+        // 声明vue组件的数据源
+        data: {
+            needShow: true,
+            title: "this is  a title",
+            msg: "hello world",
+            html: "<a href='https://www.baidu.com'>Go to Baidu</a>",
+            list: [
+                {
+                    id: 1,
+                    name: "aaa"
+                },
+                {
+                    id: 1,
+                    name: "bbb"
+                },
+                {
+                    id: 1,
+                    name: "ccc"
+                },
+            ]
+        },
+        // 定义该组件的方法
+        methods: {
+            myClick() {
+                alert("click event")
+            },
+            myEnter(obj) {
+                alert(`you click enter,input value is ${obj.currentTarget.value}`)
+            },
+            switchShow() {
+                this.needShow = !this.needShow
+            }
+        },
+        created() {
+            // 执行一些初始化的操作
+            console.log("created")
+        },
+        mounted() {
+            // dom渲染完毕
+            console.log("mounted")
+        },
+        destroyed(){
+            // vue实例销毁完毕
+            console.log("destroyed")
+        },
+        beforeDestroy(){
+            // 执行销毁vue实例之前
+            console.log("beforeDestroy")
+        }
+    })
+</script>
+
+</html>
